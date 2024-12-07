@@ -1,9 +1,13 @@
 using TaskManagerSystem.Api;
+using TaskManagerSystem.Api.Mappings;
 using TaskManagerSystem.Application;
 using TaskManagerSystem.Core;
 using TaskManagerSystem.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Registrar configuraciones de Mapster
+MapsterConfig.RegisterMappings();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -16,6 +20,9 @@ builder.Services.AddApplicationServices();
 builder.Services.AddApiServices();
 
 var app = builder.Build();
+
+// Middleware de captura de errores
+app.UseMiddleware<TaskManagerSystem.Api.Middlewares.ErrorHandlingMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

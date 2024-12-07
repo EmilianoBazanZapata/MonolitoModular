@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManagerSystem.Application.Services;
 
 namespace TaskManagerSystem.Application
 {
@@ -11,7 +12,8 @@ namespace TaskManagerSystem.Application
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-
+            services.AddScoped<TaskService>();
+            services.AddScoped<ProjectService>();
             return services;
         }
     }

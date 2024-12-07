@@ -11,10 +11,10 @@ namespace TaskManagerSystem.Infrastructure
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, string connectionString)
         {
             // Configurar DbContext para PostgreSQL
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseNpgsql(connectionString));
-
-            // Registrar repositorios
+            services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
+            
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 

@@ -1,4 +1,4 @@
-namespace TaskManagerSystem.Api.Models;
+namespace TaskManagerSystem.Application.ViewModels.Response;
 
 public class ErrorResponse
 {

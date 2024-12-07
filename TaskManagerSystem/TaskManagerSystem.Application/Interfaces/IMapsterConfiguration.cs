@@ -1,6 +1,6 @@
 using Mapster;
 
-namespace TaskManagerSystem.Api.Mappings;
+namespace TaskManagerSystem.Application.Interfaces;
 
 public interface IMapsterConfiguration
 {

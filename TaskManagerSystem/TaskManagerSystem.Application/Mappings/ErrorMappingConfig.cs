@@ -1,8 +1,9 @@
 using System.Net;
 using Mapster;
-using TaskManagerSystem.Api.Models;
+using TaskManagerSystem.Application.Interfaces;
+using TaskManagerSystem.Application.ViewModels.Response;
 
-namespace TaskManagerSystem.Api.Mappings;
+namespace TaskManagerSystem.Application.Mappings;
 
 public class ErrorMappingConfig : IMapsterConfiguration
 {

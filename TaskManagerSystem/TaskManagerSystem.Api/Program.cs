@@ -1,6 +1,7 @@
 using TaskManagerSystem.Api;
-using TaskManagerSystem.Api.Mappings;
+using TaskManagerSystem.Api.Filters;
 using TaskManagerSystem.Application;
+using TaskManagerSystem.Application.Mappings;
 using TaskManagerSystem.Core;
 using TaskManagerSystem.Infrastructure;
 
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Registrar configuraciones de Mapster
 MapsterConfig.RegisterMappings();
+
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -18,6 +20,11 @@ builder.Services.AddCoreServices();
 builder.Services.AddInfrastructureServices(builder.Configuration.GetConnectionString("DefaultConnection"));
 builder.Services.AddApplicationServices();
 builder.Services.AddApiServices();
+
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ValidateModelAttribute>();
+});
 
 var app = builder.Build();
 

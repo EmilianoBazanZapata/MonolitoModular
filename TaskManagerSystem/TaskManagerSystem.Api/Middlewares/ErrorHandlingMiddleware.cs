@@ -1,6 +1,6 @@
 using System.Text.Json;
 using Mapster;
-using TaskManagerSystem.Api.Models;
+using TaskManagerSystem.Application.ViewModels.Response;
 
 namespace TaskManagerSystem.Api.Middlewares;
 

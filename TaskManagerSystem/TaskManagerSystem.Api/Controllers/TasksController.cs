@@ -7,20 +7,13 @@ namespace TaskManagerSystem.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class TasksController : ControllerBase
+    public class TasksController(TaskService taskService) : ControllerBase
     {
-        private readonly TaskService _taskService;
-
-        public TasksController(TaskService taskService)
-        {
-            _taskService = taskService;
-        }
-
         // GET: api/tasks
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var tasks = await _taskService.GetAllTasksAsync();
+            var tasks = await taskService.GetAllTasksAsync();
             return SuccessResponseHelper.CreateResponse(tasks, "Tasks retrieved successfully.");
         }
 
@@ -28,7 +21,7 @@ namespace TaskManagerSystem.Api.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var task = await _taskService.GetTaskByIdAsync(id);
+            var task = await taskService.GetTaskByIdAsync(id);
             return SuccessResponseHelper.CreateResponse(task, $"Task with ID {id} retrieved successfully.");
         }
 
@@ -36,7 +29,7 @@ namespace TaskManagerSystem.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] TaskDto taskDto)
         {
-            var task = await _taskService.AddTaskAsync(taskDto);
+            var task = await taskService.AddTaskAsync(taskDto);
             return SuccessResponseHelper.CreateResponse(task, "Task created successfully.");
         }
 
@@ -44,7 +37,7 @@ namespace TaskManagerSystem.Api.Controllers
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] TaskDto taskDto)
         {
-            await _taskService.UpdateTaskAsync(taskDto);
+            await taskService.UpdateTaskAsync(taskDto);
             return SuccessResponseHelper.CreateResponse<object>(null, "Task updated successfully.");
         }
 
@@ -52,7 +45,7 @@ namespace TaskManagerSystem.Api.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
-            await _taskService.DeleteTaskAsync(id);
+            await taskService.DeleteTaskAsync(id);
             return SuccessResponseHelper.CreateResponse<object>(null, "Task deleted successfully.");
         }
     }

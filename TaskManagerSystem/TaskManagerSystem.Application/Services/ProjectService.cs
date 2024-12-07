@@ -1,5 +1,6 @@
 using TaskManagerSystem.Application.DTOs;
 using TaskManagerSystem.Core.Entities;
+using TaskManagerSystem.Core.Exceptions;
 using TaskManagerSystem.Core.Interfaces;
 
 namespace TaskManagerSystem.Application.Services;
@@ -32,7 +33,7 @@ public class ProjectService(IGenericRepository<Project> projectRepository)
         };
     }
 
-    public async Task AddProjectAsync(ProjectDto projectDto)
+    public async Task<Project> AddProjectAsync(ProjectDto projectDto)
     {
         var project = new Project
         {
@@ -42,12 +43,14 @@ public class ProjectService(IGenericRepository<Project> projectRepository)
         };
 
         await projectRepository.AddAsync(project);
+
+        return project;
     }
 
-    public async Task UpdateProjectAsync(ProjectDto projectDto)
+    public async Task UpdateProjectAsync(int id, ProjectDto projectDto)
     {
-        var project = await projectRepository.GetByIdAsync(projectDto.Id);
-        if (project == null) throw new Exception("Project not found.");
+        var project = await projectRepository.GetByIdAsync(id);
+        if (project == null) throw new NotFoundException("Project not found.");
 
         project.Name = projectDto.Name;
         project.UpdatedAt = DateTime.UtcNow;
@@ -59,7 +62,7 @@ public class ProjectService(IGenericRepository<Project> projectRepository)
     {
         var project = await projectRepository.GetByIdAsync(id);
 
-        if (project == null) throw new Exception("Project not found.");
+        if (project == null) throw new NotFoundException("Project not found.");
 
         await projectRepository.DeleteAsync(project.Id);
     }

@@ -9,6 +9,8 @@ namespace TaskManagerSystem.Application
         {
             services.AddScoped<TaskService>();
             services.AddScoped<ProjectService>();
+            services.AddScoped<UserService>();
+
             return services;
         }
     }

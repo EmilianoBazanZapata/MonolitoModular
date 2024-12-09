@@ -17,7 +17,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddCoreServices();
-builder.Services.AddInfrastructureServices(builder.Configuration.GetConnectionString("DefaultConnection"));
+builder.Services.AddInfrastructureServices(connectionString: builder.Configuration.GetConnectionString("DefaultConnection"),
+                                           identityConnection: builder.Configuration.GetConnectionString("IdentityConnection"));
 builder.Services.AddApplicationServices();
 builder.Services.AddApiServices();
 

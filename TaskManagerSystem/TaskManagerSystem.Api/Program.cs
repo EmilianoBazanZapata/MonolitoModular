@@ -1,50 +1,31 @@
-using TaskManagerSystem.Api;
-using TaskManagerSystem.Api.Filters;
 using TaskManagerSystem.Application;
-using TaskManagerSystem.Application.Mappings;
-using TaskManagerSystem.Core;
 using TaskManagerSystem.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Registrar configuraciones de Mapster
-MapsterConfig.RegisterMappings();
-
-
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Agregar servicios
+builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddInfrastructureServices(builder.Configuration.GetConnectionString("DefaultConnection"), 
+    builder.Configuration.GetConnectionString("IdentityConnection"));
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddCoreServices();
-builder.Services.AddInfrastructureServices(connectionString: builder.Configuration.GetConnectionString("DefaultConnection"),
-                                           identityConnection: builder.Configuration.GetConnectionString("IdentityConnection"));
-builder.Services.AddApplicationServices();
-builder.Services.AddApiServices();
-
-builder.Services.AddControllers(options =>
-{
-    options.Filters.Add<ValidateModelAttribute>();
-});
-
 var app = builder.Build();
 
-// Middleware de captura de errores
-app.UseMiddleware<TaskManagerSystem.Api.Middlewares.ErrorHandlingMiddleware>();
-
-// Configure the HTTP request pipeline.
+// Configurar middlewares
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseRouting();
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
-
 app.UseHttpsRedirection();
+
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
 
 app.Run();

@@ -1,4 +1,4 @@
-namespace TaskManagerSystem.Application.DTOs;
+namespace TaskManagerSystem.Application.DTOs.User;
 
 public class CreateUserDto
 {

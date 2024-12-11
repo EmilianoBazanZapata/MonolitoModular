@@ -7,16 +7,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="DTOs\User\" />
       <Folder Include="Interfaces\" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="FluentValidation" Version="11.11.0" />
       <PackageReference Include="Mapster" Version="7.4.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
       <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.11" />
       <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="8.0.11" />
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.3.0" />
     </ItemGroup>
 
     <ItemGroup>

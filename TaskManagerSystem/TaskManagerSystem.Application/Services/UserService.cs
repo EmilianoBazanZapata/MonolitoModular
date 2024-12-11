@@ -2,21 +2,22 @@ using Microsoft.AspNetCore.Identity;
 using TaskManagerSystem.Application.DTOs;
 using TaskManagerSystem.Core.Exceptions;
 using Mapster;
+using TaskManagerSystem.Application.DTOs.User;
 
 namespace TaskManagerSystem.Application.Services;
 
 public class UserService(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
 {
-    public IQueryable<UserDto> GetAllUsers() => userManager.Users.ProjectToType<UserDto>();
+    public IQueryable<GetUserDto> GetAllUsers() => userManager.Users.ProjectToType<GetUserDto>();
 
-    public async Task<UserDto> GetUserByIdAsync(string id)
+    public async Task<GetUserDto> GetUserByIdAsync(string id)
     {
         var user = await ValidateExistingUser(id);
 
-        return user.Adapt<UserDto>();
+        return user.Adapt<GetUserDto>();
     }
 
-    public async Task<UserDto> CreateUserAsync(CreateUserDto createUserDto)
+    public async Task<GetUserDto> CreateUserAsync(CreateUserDto createUserDto)
     {
         var existingUser = await userManager.FindByEmailAsync(createUserDto.Email);
         
@@ -30,7 +31,7 @@ public class UserService(UserManager<IdentityUser> userManager, RoleManager<Iden
         if (!result.Succeeded)
             throw new BadRequestException(result.Errors.FirstOrDefault()?.Description ?? "Failed to create user.");
 
-        return user.Adapt<UserDto>();
+        return user.Adapt<GetUserDto>();
     }
 
     public async Task UpdateUserAsync(string id, UpdateUserDto updateUserDto)

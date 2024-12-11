@@ -1,12 +1,15 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TaskManagerSystem.Application.DTOs;
 using TaskManagerSystem.Application.Services;
 using TaskManagerSystem.Api.Helpers;
+using TaskManagerSystem.Application.DTOs.User;
 
 namespace TaskManagerSystem.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class UsersController(UserService userService) : ControllerBase
 {
     [HttpGet]

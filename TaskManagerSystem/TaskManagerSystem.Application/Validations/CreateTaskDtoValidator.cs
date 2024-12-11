@@ -1,11 +1,11 @@
 using FluentValidation;
-using TaskManagerSystem.Application.DTOs;
+using TaskManagerSystem.Application.DTOs.Task;
 
 namespace TaskManagerSystem.Application.Validations
 {
-    public class TaskDtoValidator : AbstractValidator<TaskDto>
+    public class CreateTaskDtoValidator : AbstractValidator<CreateTaskDto>
     {
-        public TaskDtoValidator()
+        public CreateTaskDtoValidator()
         {
             RuleFor(task => task.Title)
                 .NotEmpty().WithMessage("The title is required.")

@@ -1,8 +1,9 @@
-namespace TaskManagerSystem.Core.Entities;
+namespace TaskManagerSystem.Application.DTOs.Project;
 
-public abstract class BaseEntity
+public class GetProjectDto
 {
     public int Id { get; set; }
+    public string Name { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 }

@@ -10,17 +10,9 @@ namespace TaskManagerSystem.Infrastructure.Repositories
     {
         private readonly DbSet<T> _dbSet = context.Set<T>();
 
-        public async Task<T?> GetByIdAsync(int id)
-        {
-            var entity = await _dbSet.FindAsync(id);
-            ValidateEntity(entity);
-            return entity;
-        }
+        public async Task<T?> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
 
-        public async Task<IEnumerable<T>> GetAllAsync()
-        {
-            return await _dbSet.ToListAsync();
-        }
+        public async Task<IEnumerable<T>> GetAllAsync() => await _dbSet.ToListAsync();
 
         public async Task AddAsync(T entity)
         {
@@ -44,10 +36,9 @@ namespace TaskManagerSystem.Infrastructure.Repositories
             await context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)
-        {
-            return await _dbSet.Where(predicate).ToListAsync();
-        }
+        public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate) 
+            => await _dbSet.Where(predicate).ToListAsync();
+
 
         // Método privado para validar si la entidad es nula
         private void ValidateEntity(T? entity)

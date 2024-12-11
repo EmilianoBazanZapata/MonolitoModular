@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TaskManagerSystem.Api.Helpers;
 using TaskManagerSystem.Application.DTOs;
+using TaskManagerSystem.Application.DTOs.Task;
 using TaskManagerSystem.Application.Services;
 
 namespace TaskManagerSystem.Api.Controllers
@@ -27,7 +28,7 @@ namespace TaskManagerSystem.Api.Controllers
 
         // POST: api/tasks
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] TaskDto taskDto)
+        public async Task<IActionResult> Create([FromBody] CreateTaskDto taskDto)
         {
             var task = await taskService.AddTaskAsync(taskDto);
             return SuccessResponseHelper.CreateResponse(task, "Task created successfully.");
@@ -35,7 +36,7 @@ namespace TaskManagerSystem.Api.Controllers
 
         // PUT: api/tasks
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] TaskDto taskDto)
+        public async Task<IActionResult> Update([FromBody] UpdateTaskDto taskDto)
         {
             await taskService.UpdateTaskAsync(taskDto);
             return SuccessResponseHelper.CreateResponse<object>(null, "Task updated successfully.");

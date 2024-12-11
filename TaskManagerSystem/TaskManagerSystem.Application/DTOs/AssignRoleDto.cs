@@ -2,5 +2,6 @@ namespace TaskManagerSystem.Application.DTOs;
 
 public class AssignRoleDto
 {
-    public string Role { get; set; } = string.Empty; 
+    public string UserId { get; set; }
+    public string RoleId { get; set; }
 }

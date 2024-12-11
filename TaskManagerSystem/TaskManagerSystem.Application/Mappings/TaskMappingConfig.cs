@@ -1,5 +1,5 @@
 using Mapster;
-using TaskManagerSystem.Application.DTOs;
+using TaskManagerSystem.Application.DTOs.Task;
 using TaskManagerSystem.Application.Interfaces;
 using TaskManagerSystem.Core.Entities;
 
@@ -9,7 +9,7 @@ public class TaskMappingConfig : IMapsterConfiguration
 {
     public void Register(TypeAdapterConfig config)
     {
-        config.NewConfig<ToDoTask, TaskDto>();
-        config.NewConfig<TaskDto, ToDoTask>();
+        config.NewConfig<ToDoTask, CreateTaskDto>();
+        config.NewConfig<CreateTaskDto, ToDoTask>();
     }
 }

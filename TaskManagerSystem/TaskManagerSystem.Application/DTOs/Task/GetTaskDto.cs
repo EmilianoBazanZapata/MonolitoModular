@@ -1,8 +1,6 @@
-using TaskStatus = TaskManagerSystem.Core.Enums.TaskStatus;
+namespace TaskManagerSystem.Application.DTOs.Task;
 
-namespace TaskManagerSystem.Application.DTOs;
-
-public class TaskDto
+public class GetTaskDto
 {
     public int Id { get; set; }
     public string Title { get; set; }

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TaskManagerSystem.Api.Helpers;
-using TaskManagerSystem.Application.DTOs;
+using TaskManagerSystem.Application.DTOs.Project;
 using TaskManagerSystem.Application.Services;
 
 namespace TaskManagerSystem.Api.Controllers;
@@ -27,7 +27,7 @@ public class ProjectsController(ProjectService projectService) : ControllerBase
 
     // POST: api/projects
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] ProjectDto projectDto)
+    public async Task<IActionResult> Create([FromBody] CreateProjectDto projectDto)
     {
         var project = await projectService.AddProjectAsync(projectDto);
         return SuccessResponseHelper.CreateResponse(project, "Project created successfully.");
@@ -35,7 +35,7 @@ public class ProjectsController(ProjectService projectService) : ControllerBase
 
     // PUT: api/projects/{id}
     [HttpPut("{id:int}")]
-    public async Task<IActionResult> Update(int id, [FromBody] ProjectDto projectDto)
+    public async Task<IActionResult> Update(int id, [FromBody] UpdateProjectDto projectDto)
     {
         await projectService.UpdateProjectAsync(id, projectDto);
         return SuccessResponseHelper.CreateResponse<object>(null, "Project updated successfully.");

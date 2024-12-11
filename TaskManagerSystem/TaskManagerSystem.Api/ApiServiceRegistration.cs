@@ -15,7 +15,8 @@ public static class ApiServiceRegistration
         services.AddSwaggerGen();
         
         // Registrar validadores de FluentValidation
-        services.AddValidatorsFromAssemblyContaining<TaskDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<CreateTaskDtoValidator>();
+        services.AddValidatorsFromAssemblyContaining<CreateUserDtoValidator>();
             
         // Registrar FluentValidation en los controladores
         services.AddFluentValidationAutoValidation();

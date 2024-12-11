@@ -26,11 +26,9 @@ public class ErrorHandlingMiddleware(RequestDelegate next)
     private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
         context.Response.ContentType = "application/json";
-
+        
         // Usar Mapster para mapear la excepción a un ErrorResponse
         var errorResponse = exception.Adapt<ErrorResponse>();
-
-        context.Response.StatusCode = errorResponse.StatusCode; // Establecer el código de estado HTTP
 
         // Serializar y enviar el objeto de respuesta
         var json = JsonSerializer.Serialize(errorResponse);

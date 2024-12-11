@@ -27,7 +27,7 @@ public class UsersController(UserService userService) : ControllerBase
     public async Task<IActionResult> Create([FromBody] CreateUserDto createUserDto)
     {
         var user = await userService.CreateUserAsync(createUserDto);
-        return CreatedAtAction(nameof(GetById), new { id = user.Id }, SuccessResponseHelper.CreateResponse(user, "User created successfully."));
+        return SuccessResponseHelper.CreateResponse(user, "User created successfully.");
     }
 
     [HttpPut("{id}")]
@@ -45,9 +45,9 @@ public class UsersController(UserService userService) : ControllerBase
     }
 
     [HttpPost("{id}/roles")]
-    public async Task<IActionResult> AssignRole(string id, [FromBody] AssignRoleDto assignRoleDto)
+    public async Task<IActionResult> AssignRole([FromBody] AssignRoleDto assignRoleDto)
     {
-        await userService.AssignRoleToUserAsync(id, assignRoleDto);
-        return SuccessResponseHelper.CreateResponse<object>(null, $"Role '{assignRoleDto.Role}' assigned to user.");
+        await userService.AssignRoleToUserAsync(assignRoleDto);
+        return SuccessResponseHelper.CreateResponse<object>(null, $"Role assigned to user.");
     }
 }

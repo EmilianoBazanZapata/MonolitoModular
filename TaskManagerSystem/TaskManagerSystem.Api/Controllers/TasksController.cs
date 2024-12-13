@@ -49,5 +49,12 @@ namespace TaskManagerSystem.Api.Controllers
             await taskService.DeleteTaskAsync(id);
             return SuccessResponseHelper.CreateResponse<object>(null, "Task deleted successfully.");
         }
+        
+        [HttpPost("/assign")]
+        public async Task<IActionResult> AssignTaskToUser([FromBody] AssignTaskDto assignTaskDto)
+        {
+            await taskService.AssignTaskToUserAsync(assignTaskDto);
+            return SuccessResponseHelper.CreateResponse(assignTaskDto, "Task assigned to user successfully.");
+        }
     }
 }

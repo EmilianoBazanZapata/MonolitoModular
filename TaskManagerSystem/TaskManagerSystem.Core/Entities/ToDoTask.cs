@@ -11,4 +11,7 @@ public class ToDoTask : BaseEntity
     
     public int ProjectId { get; set; }
     public Project? Project { get; set; }
+    
+    public string? AssignedUserId { get; set; }
+    public User? AssignedUser { get; set; }
 }

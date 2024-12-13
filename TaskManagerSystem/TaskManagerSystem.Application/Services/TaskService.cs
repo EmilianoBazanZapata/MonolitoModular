@@ -1,4 +1,5 @@
 using Mapster;
+using Microsoft.AspNetCore.Identity;
 using TaskManagerSystem.Application.DTOs.Task;
 using TaskManagerSystem.Core.Entities;
 using TaskManagerSystem.Core.Exceptions;
@@ -6,7 +7,7 @@ using TaskManagerSystem.Core.Interfaces;
 
 namespace TaskManagerSystem.Application.Services;
 
-public class TaskService(ITaskRepository taskRepository)
+public class TaskService(ITaskRepository taskRepository, UserManager<IdentityUser> userManager)
 {
     // Obtener todas las tareas
     public async Task<IEnumerable<GetTaskDto>> GetAllTasksAsync()
@@ -52,5 +53,23 @@ public class TaskService(ITaskRepository taskRepository)
 
         await taskRepository.DeleteAsync(task.Id);
         return task;
+    }
+    
+    //Asignar una tarea a un usuario
+    public async Task AssignTaskToUserAsync(AssignTaskDto assignTaskDto)
+    {
+        var task = await taskRepository.GetByIdAsync(assignTaskDto.TaskId);
+
+        if (task == null)
+            throw new NotFoundException("Task not found");
+
+        var user = await userManager.FindByIdAsync(assignTaskDto.UserId);
+
+        if (user == null)
+            throw new NotFoundException("User not found");
+
+        task.AssignedUserId = assignTaskDto.UserId;
+
+        await taskRepository.UpdateAsync(task);
     }
 }

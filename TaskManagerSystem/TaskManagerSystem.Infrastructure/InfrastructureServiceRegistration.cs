@@ -11,8 +11,8 @@ namespace TaskManagerSystem.Infrastructure
     public static class InfrastructureServiceRegistration
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, 
-            string connectionString,
-            string identityConnection)
+                                                                   string connectionString,
+                                                                   string identityConnection)
         {
             services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
             

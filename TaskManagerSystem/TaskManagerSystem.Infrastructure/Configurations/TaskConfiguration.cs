@@ -21,5 +21,10 @@ public class TaskConfiguration : IEntityTypeConfiguration<ToDoTask>
 
         builder.Property(t => t.Status)
                .IsRequired();
+        
+        builder.HasOne(t => t.AssignedUser)
+               .WithMany() 
+               .HasForeignKey(t => t.AssignedUserId)
+               .OnDelete(DeleteBehavior.SetNull);
     }
 }

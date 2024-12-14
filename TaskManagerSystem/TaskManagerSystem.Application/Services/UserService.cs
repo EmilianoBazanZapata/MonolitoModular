@@ -1,12 +1,14 @@
 using Microsoft.AspNetCore.Identity;
-using TaskManagerSystem.Application.DTOs;
 using TaskManagerSystem.Core.Exceptions;
 using Mapster;
 using TaskManagerSystem.Application.DTOs.User;
+using TaskManagerSystem.Core.Entities;
+using TaskManagerSystem.Core.Interfaces;
 
 namespace TaskManagerSystem.Application.Services;
 
-public class UserService(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+public class UserService(UserManager<User> userManager,  
+                         RoleManager<IdentityRole> roleManager)
 {
     public IQueryable<GetUserDto> GetAllUsers() => userManager.Users.ProjectToType<GetUserDto>();
 
@@ -17,29 +19,12 @@ public class UserService(UserManager<IdentityUser> userManager, RoleManager<Iden
         return user.Adapt<GetUserDto>();
     }
 
-    public async Task<GetUserDto> CreateUserAsync(CreateUserDto createUserDto)
-    {
-        var existingUser = await userManager.FindByEmailAsync(createUserDto.Email);
-        
-        if (existingUser != null)
-            throw new BadRequestException("The email is already registered.");
-        
-        var user = createUserDto.Adapt<IdentityUser>();
-
-        var result = await userManager.CreateAsync(user, createUserDto.Password);
-        
-        if (!result.Succeeded)
-            throw new BadRequestException(result.Errors.FirstOrDefault()?.Description ?? "Failed to create user.");
-
-        return user.Adapt<GetUserDto>();
-    }
-
     public async Task UpdateUserAsync(string id, UpdateUserDto updateUserDto)
     {
         var user = await ValidateExistingUser(id);
 
         updateUserDto.Adapt(user);
-
+        
         var result = await userManager.UpdateAsync(user);
         if (!result.Succeeded)
             throw new BadRequestException(result.Errors.FirstOrDefault()?.Description ?? "Failed to update user.");
@@ -69,7 +54,7 @@ public class UserService(UserManager<IdentityUser> userManager, RoleManager<Iden
             throw new BadRequestException(result.Errors.FirstOrDefault()?.Description ?? "Failed to assign role.");
     }
 
-    private async Task<IdentityUser> ValidateExistingUser(string id)
+    private async Task<User> ValidateExistingUser(string id)
     {
         var user = await userManager.FindByIdAsync(id) ?? throw new NotFoundException($"User with ID {id} not found.");
 

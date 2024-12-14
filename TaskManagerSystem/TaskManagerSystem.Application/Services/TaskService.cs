@@ -7,7 +7,7 @@ using TaskManagerSystem.Core.Interfaces;
 
 namespace TaskManagerSystem.Application.Services;
 
-public class TaskService(ITaskRepository taskRepository, UserManager<IdentityUser> userManager)
+public class TaskService(ITaskRepository taskRepository, UserManager<User> userManager)
 {
     // Obtener todas las tareas
     public async Task<IEnumerable<GetTaskDto>> GetAllTasksAsync()
@@ -19,7 +19,7 @@ public class TaskService(ITaskRepository taskRepository, UserManager<IdentityUse
     // Obtener una tarea por ID
     public async Task<GetTaskDto?> GetTaskByIdAsync(int id)
     {
-        var task = await taskRepository.GetByIdAsync(id);
+        var task = await taskRepository.GetTaskWithUserAsync(id);
         return task?.Adapt<GetTaskDto>();
     }
 

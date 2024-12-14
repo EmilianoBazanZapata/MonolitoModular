@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace TaskManagerSystem.Infrastructure.Identity.SeedData;
+namespace TaskManagerSystem.Infrastructure.Seeds.Roles;
 
 public static class IdentitySeedData
 {

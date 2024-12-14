@@ -1,7 +1,6 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using TaskManagerSystem.Application.Mappings;
-using TaskManagerSystem.Application.Services;
 using TaskManagerSystem.Application.Validations;
 
 namespace TaskManagerSystem.Api;
@@ -21,8 +20,6 @@ public static class ApiServiceRegistration
         // Registrar FluentValidation en los controladores
         services.AddFluentValidationAutoValidation();
         services.AddFluentValidationClientsideAdapters();
-        
-        services.AddScoped<TaskService>();     
         
         MapsterConfig.RegisterMappings();
         

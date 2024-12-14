@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using TaskStatus = TaskManagerSystem.Core.Enums.TaskStatus;
 
 namespace TaskManagerSystem.Core.Entities;

@@ -5,8 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Agregar servicios
 builder.Services.AddApplicationServices(builder.Configuration);
-builder.Services.AddInfrastructureServices(builder.Configuration.GetConnectionString("DefaultConnection"), 
-    builder.Configuration.GetConnectionString("IdentityConnection"));
+builder.Services.AddInfrastructureServices(builder.Configuration.GetConnectionString("DefaultConnection"));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -1,3 +1,5 @@
+using TaskManagerSystem.Application.DTOs.User;
+
 namespace TaskManagerSystem.Application.DTOs.Task;
 
 public class GetTaskDto
@@ -8,4 +10,5 @@ public class GetTaskDto
     public DateTime DueDate { get; set; }
     public TaskStatus Status { get; set; }
     public int ProjectId { get; set; }
+    public GetUserDto AssignedUser { get; set; }
 }

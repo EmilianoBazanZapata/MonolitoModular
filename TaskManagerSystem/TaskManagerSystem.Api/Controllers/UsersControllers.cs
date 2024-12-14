@@ -26,13 +26,6 @@ public class UsersController(UserService userService) : ControllerBase
         return SuccessResponseHelper.CreateResponse(user, "User retrieved successfully.");
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateUserDto createUserDto)
-    {
-        var user = await userService.CreateUserAsync(createUserDto);
-        return SuccessResponseHelper.CreateResponse(user, "User created successfully.");
-    }
-
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(string id, [FromBody] UpdateUserDto updateUserDto)
     {

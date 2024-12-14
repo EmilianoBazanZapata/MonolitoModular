@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using TaskManagerSystem.Api.Helpers;
-using TaskManagerSystem.Application.DTOs;
 using TaskManagerSystem.Application.DTOs.Task;
 using TaskManagerSystem.Application.Services;
 
@@ -50,7 +49,7 @@ namespace TaskManagerSystem.Api.Controllers
             return SuccessResponseHelper.CreateResponse<object>(null, "Task deleted successfully.");
         }
         
-        [HttpPost("/assign")]
+        [HttpPost("/Assign")]
         public async Task<IActionResult> AssignTaskToUser([FromBody] AssignTaskDto assignTaskDto)
         {
             await taskService.AssignTaskToUserAsync(assignTaskDto);

@@ -1,8 +1,8 @@
+using Microsoft.AspNetCore.Identity;
+
 namespace TaskManagerSystem.Core.Entities;
 
-public class User : BaseEntity
+public class User : IdentityUser
 {
-    public required string Name { get; set; }
-    public required string Email { get; set; }
-    public required string Role { get; set; }
+    public ICollection<ToDoTask> Tasks { get; set; } = new List<ToDoTask>();
 }

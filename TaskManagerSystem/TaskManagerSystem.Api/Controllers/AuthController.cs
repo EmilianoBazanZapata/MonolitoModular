@@ -1,30 +1,27 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using TaskManagerSystem.Api.Helpers;
 using TaskManagerSystem.Application.DTOs.Token;
+using TaskManagerSystem.Application.DTOs.User;
+using TaskManagerSystem.Application.Services;
 
-namespace TaskManagerSystem.Api.Controllers;
-
-[ApiController]
-[Route("api/[controller]")]
-public class AuthController(UserManager<IdentityUser> userManager, TokenService tokenService)
-    : ControllerBase
+namespace TaskManagerSystem.Api.Controllers
 {
-    [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class AuthController(AuthService authService) : ControllerBase
     {
-        var user = await userManager.FindByEmailAsync(loginDto.Email);
-        if (user == null || !await userManager.CheckPasswordAsync(user, loginDto.Password))
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
-            return Unauthorized(new { Message = "Invalid credentials." });
+            var token = await authService.LoginAsync(loginDto);
+            return Ok(new { Token = token });
         }
-
-        var roles = await userManager.GetRolesAsync(user);
-        var token = tokenService.GenerateToken(user.Id, user.Email, roles);
-
-        return Ok(new
+        
+        [HttpPost("register")]
+        public async Task<IActionResult> Create([FromBody] CreateUserDto createUserDto)
         {
-            Token = token,
-            Expiration = DateTime.UtcNow.AddHours(2)
-        });
+            var user = await authService.CreateUserAsync(createUserDto);
+            return SuccessResponseHelper.CreateResponse(user, "User created successfully.");
+        }
     }
 }

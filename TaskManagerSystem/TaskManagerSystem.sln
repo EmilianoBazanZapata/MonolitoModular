@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Shared.Exceptions",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Shared.Enums", "Modules.Shared.Enums\Modules.Shared.Enums.csproj", "{6421405C-6EAA-4D69-BC66-53E0A916FAE3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Shared.Entities", "Modules.Shared.Entities\Modules.Shared.Entities.csproj", "{8BF790B1-8C8A-4B41-B58A-B32B5DAE6B45}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,10 @@ Global
 		{6421405C-6EAA-4D69-BC66-53E0A916FAE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6421405C-6EAA-4D69-BC66-53E0A916FAE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6421405C-6EAA-4D69-BC66-53E0A916FAE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BF790B1-8C8A-4B41-B58A-B32B5DAE6B45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BF790B1-8C8A-4B41-B58A-B32B5DAE6B45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BF790B1-8C8A-4B41-B58A-B32B5DAE6B45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BF790B1-8C8A-4B41-B58A-B32B5DAE6B45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -151,5 +157,6 @@ Global
 		{87BB0F02-A697-48D4-8A03-E17E2475929C} = {040865E9-849F-4F92-811B-9528F54E74BF}
 		{8A926C65-BF4E-405F-8BCA-1A71907963E3} = {80372122-F61F-4B1E-913E-3A2CA2BC6AAC}
 		{6421405C-6EAA-4D69-BC66-53E0A916FAE3} = {80372122-F61F-4B1E-913E-3A2CA2BC6AAC}
+		{8BF790B1-8C8A-4B41-B58A-B32B5DAE6B45} = {80372122-F61F-4B1E-913E-3A2CA2BC6AAC}
 	EndGlobalSection
 EndGlobal

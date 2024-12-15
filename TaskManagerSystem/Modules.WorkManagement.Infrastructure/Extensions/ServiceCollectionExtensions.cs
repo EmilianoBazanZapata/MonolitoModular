@@ -9,7 +9,7 @@ namespace Modules.WorkManagement.Infrastructure.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddCatalogInfrastructure(this IServiceCollection services, IConfiguration config)
+    public static IServiceCollection AddWorkManagementInfrastructure(this IServiceCollection services, IConfiguration config)
     {
         services.AddDatabaseContext<WorkManagementDbContext>(config)
                 .AddScoped<IWorkManagementDbContext>(provider => provider.GetService<WorkManagementDbContext>());

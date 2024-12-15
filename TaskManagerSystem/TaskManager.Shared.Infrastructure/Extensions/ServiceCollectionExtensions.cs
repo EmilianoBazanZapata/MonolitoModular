@@ -22,7 +22,7 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddDatabaseContext<T>(this IServiceCollection services, IConfiguration config) where T : DbContext
     {
-        // Obtiene la cadena de conexiÛn desde la configuraciÛn
+        // Obtiene la cadena de conexi√≥n desde la configuraci√≥n
         var connectionString = config.GetConnectionString("Default");
 
         // Configura el contexto de base de datos con PostgreSQL
@@ -34,10 +34,10 @@ public static class ServiceCollectionExtensions
             });
         });
 
-        // Aplica migraciones autom·ticamente
-        using var scope = services.BuildServiceProvider().CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<T>();
-        dbContext.Database.Migrate();
+        // Aplica migraciones autom√°ticamente
+        //using var scope = services.BuildServiceProvider().CreateScope();
+        //var dbContext = scope.ServiceProvider.GetRequiredService<T>();
+        //dbContext.Database.Migrate();
 
         return services;
     }

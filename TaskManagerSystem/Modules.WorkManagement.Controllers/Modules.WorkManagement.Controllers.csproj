@@ -6,4 +6,13 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Modules.WorkManagement.Core\Modules.WorkManagement.Core.csproj" />
+      <ProjectReference Include="..\Modules.WorkManagement.Infrastructure\Modules.WorkManagement.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>

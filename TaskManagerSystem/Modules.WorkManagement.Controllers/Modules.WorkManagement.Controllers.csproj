@@ -7,10 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="MediatR" Version="12.4.1" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Modules.WorkManagement.Application\Modules.WorkManagement.Application.csproj" />
       <ProjectReference Include="..\Modules.WorkManagement.Core\Modules.WorkManagement.Core.csproj" />
       <ProjectReference Include="..\Modules.WorkManagement.Infrastructure\Modules.WorkManagement.Infrastructure.csproj" />
     </ItemGroup>

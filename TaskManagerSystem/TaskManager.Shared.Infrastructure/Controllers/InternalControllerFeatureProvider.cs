@@ -20,7 +20,7 @@ internal class InternalControllerFeatureProvider : ControllerFeatureProvider
         if (typeInfo.IsDefined(typeof(NonControllerAttribute)))
             return false;
 
-        return typeInfo.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase) ||
+        return typeInfo.Name.EndsWith("controller", StringComparison.OrdinalIgnoreCase) ||
                typeInfo.IsDefined(typeof(ControllerAttribute));
     }
 }

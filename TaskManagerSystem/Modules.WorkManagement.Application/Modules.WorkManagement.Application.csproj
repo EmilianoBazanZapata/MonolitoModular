@@ -6,4 +6,20 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Features\Projects\Validators\" />
+      <Folder Include="Features\Tasks\Commands\" />
+      <Folder Include="Features\Tasks\Queries\" />
+      <Folder Include="Features\Tasks\Validators\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="12.4.1" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Modules.WorkManagement.Infrastructure\Modules.WorkManagement.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>

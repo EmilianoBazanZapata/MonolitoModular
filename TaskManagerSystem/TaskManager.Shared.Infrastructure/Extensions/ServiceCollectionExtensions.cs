@@ -9,29 +9,26 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IConfiguration config)
     {
-
         // Agregar soporte para controladores
         services.AddControllers()
-                .ConfigureApplicationPartManager(manager =>
-                {
-                    manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
-                });
-
+            .ConfigureApplicationPartManager(manager =>
+            {
+                manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
+            });
         return services;
     }
 
-    public static IServiceCollection AddDatabaseContext<T>(this IServiceCollection services, IConfiguration config) where T : DbContext
+    public static IServiceCollection AddDatabaseContext<T>(this IServiceCollection services, IConfiguration config)
+        where T : DbContext
     {
         // Obtiene la cadena de conexión desde la configuración
-        var connectionString = config.GetConnectionString("Default");
+        var connectionString = config.GetConnectionString("DefaultConnection");
 
         // Configura el contexto de base de datos con PostgreSQL
         services.AddDbContext<T>(options =>
         {
-            options.UseNpgsql(connectionString, npgsqlOptions =>
-            {
-                npgsqlOptions.MigrationsAssembly(typeof(T).Assembly.FullName);
-            });
+            options.UseNpgsql(connectionString,
+                npgsqlOptions => { npgsqlOptions.MigrationsAssembly(typeof(T).Assembly.FullName); });
         });
 
         // Aplica migraciones automáticamente

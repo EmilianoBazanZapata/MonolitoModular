@@ -1,5 +1,6 @@
 using Modules.Shared.Entities;
 using Modules.Users.Core.Entities;
+using TaskManager.Shared.Core.Entities;
 
 namespace Modules.WorkManagement.Core.Entities;
 

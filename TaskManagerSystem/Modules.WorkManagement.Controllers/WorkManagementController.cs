@@ -24,8 +24,8 @@ public class ProjectsController(IMediator _mediator) : ControllerBase
     [HttpPut]
     public async Task<IActionResult> Update([FromBody] UpdateProjectCommand command)
     {
-        var result = await _mediator.Send(command);
-        return Ok(result);
+        var projectUpdated = await _mediator.Send(command);
+        return SuccessResponseHelper.CreateResponse(projectUpdated, "Project updated successfully.");
     }
     
     [HttpGet]
@@ -39,14 +39,14 @@ public class ProjectsController(IMediator _mediator) : ControllerBase
     public async Task<IActionResult> GetById(int id)
     {
         var query = new GetProjectByIdQuery(id);
-        var result = await _mediator.Send(query);
-        return Ok(result);
+        var project = await _mediator.Send(query);
+        return SuccessResponseHelper.CreateResponse(project);
     }
     
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete(int id)
     {
         await _mediator.Send(new DeleteProjectCommand(id));
-        return NoContent();
+        return SuccessResponseHelper.CreateResponse("Project deleted successfully.");
     }
 }

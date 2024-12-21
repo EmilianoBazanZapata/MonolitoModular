@@ -17,6 +17,7 @@ public class UpdateProjectCommandHandler(WorkManagementDbContext context) : IReq
         
         project.Name = request.Name;
         project.UpdatedAt = DateTime.UtcNow;
+        project.Description = request.Description;
 
         context.Projects.Update(project);
         await context.SaveChangesAsync(cancellationToken);

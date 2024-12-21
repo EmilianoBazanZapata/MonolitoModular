@@ -1,27 +1,34 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Modules.Shared.Exceptions;
 using Modules.WorkManagement.Core.DTOs.Project;
 using Modules.WorkManagement.Infrastructure.Persistence;
+using TaskManager.Shared.Core.Exceptions;
 
 namespace Modules.WorkManagement.Application.Features.Projects.Commands.UpdateProject;
 
-public class UpdateProjectCommandHandler(WorkManagementDbContext context) : IRequestHandler<UpdateProjectCommand, GetProjectDto>
+public class UpdateProjectCommandHandler(WorkManagementDbContext _context)
+    : IRequestHandler<UpdateProjectCommand, GetProjectDto>
 {
     public async Task<GetProjectDto> Handle(UpdateProjectCommand request, CancellationToken cancellationToken)
     {
-        var project = await context.Projects.FirstOrDefaultAsync(p =>p.Id == request.Id, cancellationToken: cancellationToken);
+        var projectExisting = await _context.Projects.AnyAsync(p  => request.Name.Equals(p.Name) && 
+                                                                            p.Id != request.Id, cancellationToken);
+        
+        if (projectExisting)
+            throw new ConflictException($"the project {request.Name} already registered.");
+        
+        var project = await _context.Projects.FirstOrDefaultAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
 
         if (project == null)
             throw new NotFoundException($"Project with ID {request.Id} not found.");
-        
+
         project.Name = request.Name;
         project.UpdatedAt = DateTime.UtcNow;
         project.Description = request.Description;
 
-        context.Projects.Update(project);
-        await context.SaveChangesAsync(cancellationToken);
-        
+        _context.Projects.Update(project);
+        await _context.SaveChangesAsync(cancellationToken);
+
         return new GetProjectDto
         {
             Id = project.Id,

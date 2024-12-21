@@ -1,8 +1,8 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Modules.Shared.Exceptions;
 using Modules.WorkManagement.Core.DTOs.Project;
 using Modules.WorkManagement.Infrastructure.Persistence;
+using TaskManager.Shared.Core.Exceptions;
 
 namespace Modules.WorkManagement.Application.Features.Projects.Queries.GetProjectById;
 

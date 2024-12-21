@@ -2,7 +2,7 @@ using System.Text.Json;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Modules.Shared.Entities;
-using Modules.Shared.Exceptions;
+using TaskManager.Shared.Core.Exceptions;
 
 namespace TaskManager.Shared.Core.Middlewares;
 

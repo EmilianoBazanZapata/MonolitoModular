@@ -3,9 +3,9 @@ using Modules.WorkManagement.Application.Features.Projects.Commands.CreateProjec
 
 namespace Modules.WorkManagement.Application.Features.Projects.Validators;
 
-public class CreateProjectDtoValidator : AbstractValidator<CreateProjectCommand>
+public class CreateProjectCommandValidator : AbstractValidator<CreateProjectCommand>
 {
-    public CreateProjectDtoValidator()
+    public CreateProjectCommandValidator()
     {
         RuleFor(project => project.Name)
             .NotEmpty()

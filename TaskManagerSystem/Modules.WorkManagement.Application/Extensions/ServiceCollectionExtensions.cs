@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Modules.WorkManagement.Application.Features.Projects.Validators;
+using Modules.WorkManagement.Application.Features.Tasks.Validators;
 
 namespace Modules.WorkManagement.Application.Extensions;
 
@@ -12,8 +13,10 @@ public static class ServiceCollectionExtensions
     {
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
         
-        services.AddValidatorsFromAssembly(typeof(CreateProjectDtoValidator).Assembly);
-        services.AddValidatorsFromAssembly(typeof(UpdateProjectDtoValidator).Assembly);
+        services.AddValidatorsFromAssembly(typeof(CreateProjectCommandValidator).Assembly);
+        services.AddValidatorsFromAssembly(typeof(UpdateProjectCommandValidator).Assembly);
+        
+        services.AddValidatorsFromAssembly(typeof(CreateTaskCommandValidator).Assembly);
         
         services.AddFluentValidationAutoValidation();
         

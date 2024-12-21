@@ -3,10 +3,4 @@ using Modules.WorkManagement.Core.DTOs.Project;
 
 namespace Modules.WorkManagement.Application.Features.Projects.Commands.UpdateProject;
 
-public class UpdateProjectCommand : BaseCommand<GetProjectDto>
-{
-    public int Id { get; set; }
-    public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
-    public DateTime? UpdatedAt { get; set; } 
-}
+public record UpdateProjectCommand(int Id, DateTime StartDate, DateTime EndDate, DateTime? UpdatedAt) : BaseCommand<GetProjectDto> { }

@@ -13,7 +13,7 @@ public class CreateProjectCommandHandler(WorkManagementDbContext _context) : IRe
         var projectExisting = await _context.Projects.AnyAsync(p => p.Name == request.Name, cancellationToken);
 
         if (projectExisting)
-            throw new ConflictException($"the project {request.Name} already registered.");
+            throw new ConflictException($"The project {request.Name} already registered.");
         
         var project = new Project
         {

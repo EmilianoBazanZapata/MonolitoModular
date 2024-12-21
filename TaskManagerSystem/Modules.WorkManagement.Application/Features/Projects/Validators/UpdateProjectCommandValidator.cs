@@ -3,9 +3,9 @@ using Modules.WorkManagement.Application.Features.Projects.Commands.UpdateProjec
 
 namespace Modules.WorkManagement.Application.Features.Projects.Validators;
 
-public class UpdateProjectDtoValidator : AbstractValidator<UpdateProjectCommand>
+public class UpdateProjectCommandValidator : AbstractValidator<UpdateProjectCommand>
 {
-    public UpdateProjectDtoValidator()
+    public UpdateProjectCommandValidator()
     {
         RuleFor(project => project.Id)
             .GreaterThan(0)

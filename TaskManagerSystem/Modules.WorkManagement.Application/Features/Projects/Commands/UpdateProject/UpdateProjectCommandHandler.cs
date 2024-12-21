@@ -15,7 +15,7 @@ public class UpdateProjectCommandHandler(WorkManagementDbContext _context)
                                                                             p.Id != request.Id, cancellationToken);
         
         if (projectExisting)
-            throw new ConflictException($"the project {request.Name} already registered.");
+            throw new ConflictException($"The project {request.Name} already registered.");
         
         var project = await _context.Projects.FirstOrDefaultAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
 

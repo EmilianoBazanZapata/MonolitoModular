@@ -31,8 +31,8 @@ public class ProjectsController(IMediator _mediator) : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var result = await _mediator.Send(new GetAllProjectsQuery());
-        return Ok(result);
+        var projects = await _mediator.Send(new GetAllProjectsQuery());
+        return SuccessResponseHelper.CreateResponse(projects, "Projects retrieved successfully.");
     }
     
     [HttpGet("{id:int}")]

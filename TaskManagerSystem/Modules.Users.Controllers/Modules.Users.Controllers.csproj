@@ -7,4 +7,14 @@
         <RootNamespace>Modules.Users.Controllers</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="12.4.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Modules.Users.Application\Modules.Users.Application.csproj" />
+      <ProjectReference Include="..\Modules.Users.Core\Modules.Users.Core.csproj" />
+      <ProjectReference Include="..\Modules.Users.Infrastructure\Modules.Users.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>

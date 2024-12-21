@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace Modules.Users.Core.Entities;
+namespace Modules.User.Users.Entities;
 
-public class User : IdentityUser
+public class UserEntity : IdentityUser
 {
     //public ICollection<ToDoTask> Tasks { get; set; } = new List<ToDoTask>();
 }

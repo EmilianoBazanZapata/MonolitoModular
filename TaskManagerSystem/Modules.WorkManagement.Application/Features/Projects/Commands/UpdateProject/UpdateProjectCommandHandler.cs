@@ -29,12 +29,6 @@ public class UpdateProjectCommandHandler(WorkManagementDbContext _context)
         _context.Projects.Update(project);
         await _context.SaveChangesAsync(cancellationToken);
 
-        return new GetProjectDto
-        {
-            Id = project.Id,
-            Name = project.Name,
-            CreatedAt = project.CreatedAt,
-            UpdatedAt = project.UpdatedAt
-        };
+        return new GetProjectDto(project.Id,project.Name,project.Description,project.CreatedAt,project.UpdatedAt);
     }
 }

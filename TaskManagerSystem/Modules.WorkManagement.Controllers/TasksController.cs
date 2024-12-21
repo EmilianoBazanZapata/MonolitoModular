@@ -25,7 +25,7 @@ namespace Modules.WorkManagement.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var task = await _mediator.Send(new GetTaskByIdQuery(id));
-            return Ok(task);
+            return SuccessResponseHelper.CreateResponse(task, $"Task with ID {id} retrieved successfully.");
         }
         
         [HttpPost]

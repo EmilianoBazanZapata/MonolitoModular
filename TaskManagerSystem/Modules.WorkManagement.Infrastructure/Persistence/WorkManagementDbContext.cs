@@ -1,14 +1,13 @@
 using Microsoft.EntityFrameworkCore;
+using Modules.User.Users.Abstractions;
 using Modules.WorkManagement.Core.Abstractions;
 using Modules.WorkManagement.Core.Entities;
 using TaskManager.Shared.Infrastructure.Persistance;
 
 namespace Modules.WorkManagement.Infrastructure.Persistence;
 
-public class WorkManagementDbContext: ModuleDbContext, IWorkManagementDbContext
+public class WorkManagementDbContext(DbContextOptions options) : ModuleDbContext(options), IWorkManagementDbContext
 {
-    public WorkManagementDbContext(DbContextOptions options) : base(options) { }
-
     public DbSet<Project> Projects { get; set; }
     
     public DbSet<ToDoTask> ToDoTasks { get; set; }

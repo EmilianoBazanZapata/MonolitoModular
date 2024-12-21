@@ -1,4 +1,4 @@
-using Modules.Users.Core.Entities;
+using Modules.User.Users.Entities;
 using TaskManager.Shared.Core.Entities;
 
 namespace Modules.WorkManagement.Core.Entities;
@@ -13,5 +13,5 @@ public class ToDoTask : BaseEntity
     public Project? Project { get; set; }
     
     public string? AssignedUserId { get; set; }
-    public User? AssignedUser { get; set; }
+    public UserEntity? AssignedUser { get; set; }
 }

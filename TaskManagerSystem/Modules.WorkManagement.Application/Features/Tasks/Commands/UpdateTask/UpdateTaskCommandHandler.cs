@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Modules.User.Users.Abstractions;
 using Modules.WorkManagement.Core.Abstractions;
 using TaskManager.Shared.Core.Exceptions;
 

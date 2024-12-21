@@ -11,13 +11,6 @@ public class GetAllProjectsQueryHandler(WorkManagementDbContext context) : IRequ
     {
         var projects = await context.Projects.ToListAsync(cancellationToken: cancellationToken);
         
-        return projects.Select(project => new GetProjectDto
-        {
-            Id = project.Id,
-            Name = project.Name,
-            Description = project.Description,
-            CreatedAt = project.CreatedAt,
-            UpdatedAt = project.UpdatedAt
-        });
+        return projects.Select(project => new GetProjectDto(project.Id,project.Name,project.Description,project.CreatedAt,project.UpdatedAt));
     }
 }

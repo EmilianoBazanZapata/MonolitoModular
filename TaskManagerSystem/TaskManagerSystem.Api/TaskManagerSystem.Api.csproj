@@ -16,6 +16,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Modules.Users.Application\Modules.Users.Application.csproj" />
+      <ProjectReference Include="..\Modules.Users.Controllers\Modules.Users.Controllers.csproj" />
       <ProjectReference Include="..\Modules.WorkManagement.Controllers\Modules.WorkManagement.Controllers.csproj" />
       <ProjectReference Include="..\Modules.WorkManagement.Infrastructure\Modules.WorkManagement.Infrastructure.csproj" />
     </ItemGroup>

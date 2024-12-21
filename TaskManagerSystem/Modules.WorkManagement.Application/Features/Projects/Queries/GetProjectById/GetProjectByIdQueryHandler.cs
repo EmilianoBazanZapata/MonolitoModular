@@ -16,12 +16,6 @@ public class GetProjectByIdQueryHandler(WorkManagementDbContext context) : IRequ
         if (project == null)
             throw new NotFoundException($"Project with ID {request.Id} not found.");
 
-        return new GetProjectDto
-        {
-            Id = project.Id,
-            Name = project.Name,
-            CreatedAt = project.CreatedAt,
-            UpdatedAt = project.UpdatedAt
-        };
+        return new GetProjectDto(project.Id, project.Name, project.Description, project.CreatedAt, project.UpdatedAt);
     }
 }

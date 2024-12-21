@@ -21,20 +21,19 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddDatabaseContext<T>(this IServiceCollection services, IConfiguration config)
         where T : DbContext
     {
-        // Obtiene la cadena de conexión desde la configuración
-        var connectionString = config.GetConnectionString("DefaultConnection");
-
+        
+        if (services.Any(s => s.ServiceType == typeof(DbContextOptions<T>))) return services; 
+        
         // Configura el contexto de base de datos con PostgreSQL
         services.AddDbContext<T>(options =>
         {
-            options.UseNpgsql(connectionString,
-                npgsqlOptions => { npgsqlOptions.MigrationsAssembly(typeof(T).Assembly.FullName); });
+            options.UseNpgsql(config.GetConnectionString("DefaultConnection"));
         });
 
         // Aplica migraciones automáticamente
-        //using var scope = services.BuildServiceProvider().CreateScope();
-        //var dbContext = scope.ServiceProvider.GetRequiredService<T>();
-        //dbContext.Database.Migrate();
+        using var scope = services.BuildServiceProvider().CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<T>();
+        dbContext.Database.Migrate();
 
         return services;
     }

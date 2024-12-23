@@ -31,9 +31,9 @@ public static class ServiceCollectionExtensions
         });
 
         // Aplica migraciones automáticamente
-        using var scope = services.BuildServiceProvider().CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<T>();
-        dbContext.Database.Migrate();
+        // using var scope = services.BuildServiceProvider().CreateScope();
+        // var dbContext = scope.ServiceProvider.GetRequiredService<T>();
+        // dbContext.Database.Migrate();
 
         return services;
     }

@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Modules.User.Users.Abstractions;
 using Modules.WorkManagement.Core.Abstractions;
 using Modules.WorkManagement.Core.Entities;
 using TaskManager.Shared.Infrastructure.Persistance;

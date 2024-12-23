@@ -1,5 +1,7 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Modules.User.Users.DTOs;
 using Modules.Users.Application.Features.Users.Commands.CreateUser;
 using Modules.Users.Application.Features.Users.Commands.DeleteUser;
 using Modules.Users.Application.Features.Users.Commands.UpdateUser;

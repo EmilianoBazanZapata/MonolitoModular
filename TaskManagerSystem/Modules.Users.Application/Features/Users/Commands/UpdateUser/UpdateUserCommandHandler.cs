@@ -1,11 +1,10 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Modules.User.Users.Entities;
 using TaskManager.Shared.Core.Exceptions;
 
 namespace Modules.Users.Application.Features.Users.Commands.UpdateUser;
 
-public class UpdateUserCommandHandler(UserManager<UserEntity> userManager) : IRequestHandler<UpdateUserCommand>
+public class UpdateUserCommandHandler(UserManager<IdentityUser> userManager) : IRequestHandler<UpdateUserCommand>
 {
     public async Task Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {

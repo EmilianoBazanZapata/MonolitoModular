@@ -1,11 +1,10 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Modules.User.Users.Entities;
 using TaskManager.Shared.Core.Exceptions;
 
 namespace Modules.Users.Application.Features.Users.Commands.DeleteUser;
 
-public class DeleteUserCommandHandler(UserManager<UserEntity> userManager)
+public class DeleteUserCommandHandler(UserManager<IdentityUser> userManager)
     : IRequestHandler<DeleteUserCommand>
 {
     public async Task Handle(DeleteUserCommand request, CancellationToken cancellationToken)

@@ -1,6 +1,7 @@
 
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Modules.WorkManagement.Application.Features.Tasks.Commands.AssignTask;
 using Modules.WorkManagement.Application.Features.Tasks.Commands.CreateTask;
 using Modules.WorkManagement.Application.Features.Tasks.Commands.DeleteTask;
 using Modules.WorkManagement.Application.Features.Tasks.Commands.UpdateTask;
@@ -47,6 +48,13 @@ namespace Modules.WorkManagement.Controllers
         {
             await _mediator.Send(new DeleteTaskCommand(id));
             return SuccessResponseHelper.CreateResponse("Task deleted successfully.");
+        }
+        
+        [HttpPost("/assign")]
+        public async Task<IActionResult> AssignTaskToUser([FromBody] AssignTaskCommand command)
+        {
+            await _mediator.Send(command);
+            return SuccessResponseHelper.CreateResponse( "Task assigned successfully.");
         }
     }
 }

@@ -1,12 +1,11 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Modules.User.Users.Entities;
 using Modules.WorkManagement.Core.DTOs.Task;
 using TaskManager.Shared.Core.Exceptions;
 
 namespace Modules.Users.Application.Features.Users.Queries.GetUserByIdQuery;
 
-public class GetUserByIdQueryHandler(UserManager<UserEntity> userManager)
+public class GetUserByIdQueryHandler(UserManager<IdentityUser> userManager)
     : IRequestHandler<GetUserByIdQuery, UserDto>
 {
     public async Task<UserDto> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)

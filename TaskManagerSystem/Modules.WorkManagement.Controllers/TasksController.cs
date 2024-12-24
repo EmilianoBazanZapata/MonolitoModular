@@ -1,5 +1,6 @@
 
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Modules.WorkManagement.Application.Features.Tasks.Commands.AssignTask;
 using Modules.WorkManagement.Application.Features.Tasks.Commands.CreateTask;
@@ -13,6 +14,7 @@ namespace Modules.WorkManagement.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class TasksController(IMediator _mediator) : ControllerBase
     {
         [HttpGet]
@@ -33,7 +35,7 @@ namespace Modules.WorkManagement.Controllers
         public async Task<IActionResult> Create([FromBody] CreateTaskCommand command)
         {
             var taskId = await _mediator.Send(command);
-            return SuccessResponseHelper.CreateResponse<int>(taskId,"Task created successfully.");
+            return SuccessResponseHelper.CreateResponse(taskId,"Task created successfully.");
         }
         
         [HttpPut]
@@ -50,7 +52,7 @@ namespace Modules.WorkManagement.Controllers
             return SuccessResponseHelper.CreateResponse("Task deleted successfully.");
         }
         
-        [HttpPost("/assign")]
+        [HttpPost("assign")]
         public async Task<IActionResult> AssignTaskToUser([FromBody] AssignTaskCommand command)
         {
             await _mediator.Send(command);

@@ -8,12 +8,11 @@ using Modules.WorkManagement.Controllers.Extensions;
 using TaskManager.Shared.Core.Middlewares;
 using TaskManager.Shared.Infrastructure.Extensions;
 using Modules.Users.Infrastructure.Extensions;
+using TaskManager.Shared.Application.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configurar servicios
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSharedApplication(builder.Configuration);
 
 // Configuraci�n compartida
 builder.Services.AddSharedInfrastructure(builder.Configuration);
@@ -30,30 +29,30 @@ builder.Services.AddWorkManagementInfrastructure(builder.Configuration);
 builder.Services.AddWorkManagementCore();
 builder.Services.AddWorkManagementControllers(builder.Configuration);
 
+// Registrar servicios de Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
 
-// Middleware de manejo de errores
+//Aplicar semilla de datos
+await app.Services.SeedDataAsync();
+
+// Configurar middlewares
 app.UseMiddleware<ErrorHandlingMiddleware>();
 
-// Configuraci�n del pipeline HTTP
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
 
-// Aseg�rate de que estos middlewares est�n configurados correctamente
-app.UseAuthentication(); // Middleware de autenticaci�n
-app.UseAuthorization();  // Middleware de autorizaci�n
-
 app.UseRouting();
-
-// Mapear controladores
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
 
 app.Run();

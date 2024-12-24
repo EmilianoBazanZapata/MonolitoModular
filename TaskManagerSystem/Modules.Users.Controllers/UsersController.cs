@@ -9,45 +9,41 @@ using Modules.Users.Application.Features.Users.Queries.GetAllUsersQuery;
 using Modules.Users.Application.Features.Users.Queries.GetUserByIdQuery;
 using Modules.WorkManagement.Core.DTOs;
 using Modules.WorkManagement.Core.DTOs.Task;
+using TaskManager.Shared.Core.Helpers;
 
 namespace Modules.Users.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize(AuthenticationSchemes = "Bearer")]
 public class UsersController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
         var result = await mediator.Send(new GetAllUsersQuery());
-        return Ok(result);
+        return SuccessResponseHelper.CreateResponse(result, "Users retrieved successfully.");
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(string id)
     {
         var result = await mediator.Send(new GetUserByIdQuery(id));
-        return Ok(result);
+        return SuccessResponseHelper.CreateResponse(result);
     }
-
-    [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateUserDto userDto)
-    {
-        var result = await mediator.Send(new CreateUserCommand(userDto));
-        return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
-    }
+    
 
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(string id, [FromBody] UpdateUserDto userDto)
     {
         await mediator.Send(new UpdateUserCommand(id, userDto));
-        return NoContent();
+        return SuccessResponseHelper.CreateResponse("User updated successfully.");
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(string id)
     {
         await mediator.Send(new DeleteUserCommand(id));
-        return NoContent();
+        return SuccessResponseHelper.CreateResponse("User deleted successfully.");
     }
 }

@@ -14,6 +14,11 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Modules.WorkManagement.Core\Modules.WorkManagement.Core.csproj" />
+      <ProjectReference Include="..\TaskManager.Shared.Application\TaskManager.Shared.Application.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Services\" />
     </ItemGroup>
 
 </Project>

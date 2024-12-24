@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Modules.WorkManagement.Application.Features.Projects.Commands.CreateProject;
 using Modules.WorkManagement.Application.Features.Projects.Commands.DeleteProject;
@@ -11,6 +12,7 @@ namespace Modules.WorkManagement.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize(AuthenticationSchemes = "Bearer")]
 public class ProjectsController(IMediator _mediator) : ControllerBase
 {
     [HttpPost]

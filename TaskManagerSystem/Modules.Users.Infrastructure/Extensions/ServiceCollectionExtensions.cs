@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Modules.Users.Infrastructure.Persistence;
+using Modules.Users.Infrastructure.Persistence.Seeds;
 using TaskManager.Shared.Infrastructure.Extensions;
 
 namespace Modules.Users.Infrastructure.Extensions
@@ -21,6 +22,11 @@ namespace Modules.Users.Infrastructure.Extensions
             services.AddSharedInfrastructure(config);
 
             return services;
+        }
+        
+        public static async Task SeedDataAsync(this IServiceProvider serviceProvider)
+        {
+            await DataSeeder.SeedAsync(serviceProvider);
         }
     }
 }

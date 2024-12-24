@@ -76,11 +76,26 @@ The application is designed as a **modular monolith** with the following modules
 
 2. **Set up database connections**:
    Update the `appsettings.json` file with your PostgreSQL connection string:
-   ```json
-   "ConnectionStrings": {
-     "DefaultConnection": "Host=localhost;Database=TaskManagerDB;Username=your_user;Password=your_password"
-   }
-   ```
+    ```json
+    {
+      "ConnectionStrings": {
+        "DefaultConnection": "Host=localhost;Database=TaskManagerDB;Username=your_user;Password=your_password"
+      },
+      "Jwt": {
+        "Key": "your_secret_key",
+        "Issuer": "your_issuer",
+        "Audience": "your_audience"
+      },
+      "Logging": {
+        "LogLevel": {
+          "Default": "Information",
+          "Microsoft": "Debug",
+          "Microsoft.AspNetCore": "Debug"
+        }
+      },
+      "AllowedHosts": "*"
+    }
+    ```
 
 3. **Run database migrations**:
    ```bash
@@ -98,18 +113,9 @@ The application is designed as a **modular monolith** with the following modules
    ```
 
 2. Access the API:
-   - Swagger: [http://localhost:5000/swagger](http://localhost:5000/swagger)
+   - Swagger: [http://localhost:5223/swagger](http://localhost:5223/swagger)
 
 ---
-
-## Testing
-
-### Unit Tests
-
-Run unit tests for individual modules:
-```bash
-dotnet test
-```
 
 ### Postman Collection
 

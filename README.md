@@ -25,6 +25,7 @@
   - Unified controllers for modular API endpoints.
   - Reusable services and validators.
 
+
 ---
 
 ## Architecture
@@ -44,7 +45,10 @@ The application is designed as a **modular monolith** with the following modules
   - Application (CQRS commands, queries, and mediators)
   - Infrastructure (Database context, repositories)
   - API (Controllers and middleware)
-
+  
+<div align="center">
+<img src="https://lh3.googleusercontent.com/pw/AP1GczMk6fWnz3yPNhzr54ha8CrrYkKw_KKDxvsfQ3vmC_e3u5oFcaeLjdQ0P8fwRrVgFyZ7kUPJLN9NgBmIjmsqAvB5eIKDkQwYxXmoPNvZm8CSXEQvE_s-RKU7gqLhpoQFxl6I6gX4DF5Eb1VWi4N_CCXf=w397-h480-s-no-gm?authuser=0">
+</div>
 ---
 
 ## Roadmap
